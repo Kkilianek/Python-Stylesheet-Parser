@@ -23,7 +23,7 @@ class Parser:
             self.stylesheet()
             self.take_token('EOF')
         else:
-            self.error("Epsilon not allowed")
+            self.error("Start of stylesheet expected but got %s" % self.token.type)
 
     def stylesheet(self):
         if self.token.type != 'EOF':
