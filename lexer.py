@@ -84,4 +84,4 @@ class Lexer:
         if self.current_token_number - 1 < len(self.tokens):
             return self.tokens[self.current_token_number - 1]
         else:
-            raise RuntimeError('Error: No more tokens')
+            raise StopIteration('No more tokens!')
