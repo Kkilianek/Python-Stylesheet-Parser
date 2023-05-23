@@ -60,6 +60,10 @@ class Parser:
         self.declaration_block()
 
     def declaration_block(self, recurrence: bool = True):
+        if self.token.type == 'COMMENT':
+            self.take_token('COMMENT')
+        if self.token.type == 'DEDENT':
+            return
         recurrence = self.declaration(recurrence)
         if self.token.type == 'ASSIGN':
             self.take_token('ASSIGN')
@@ -87,7 +91,7 @@ class Parser:
             self.error("Missing indent")
 
     def value(self):
-        while self.token.type in ['STRING', 'IMPORTANT', 'NUMBER', 'SPECIAL', 'COLOR', 'COMMENT', 'PARENTHESIZED']:
+        while self.token.type in ['STRING', 'IMPORTANT', 'NUMBER', 'SPECIAL', 'COLOR', 'PARENTHESIZED']:
             self.take_token(self.token.type)
 
         if self.token.type == 'END':
